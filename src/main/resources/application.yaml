@@ -1,3 +1,41 @@
 spring:
   application:
-    name: retail-operations
+    name: retail-service
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  liquibase:
+    enabled: false
+    change-log: classpath:db/changelog/db-changelog-master.yaml
+    contexts: dev
+    drop-first: false
+    database-change-log-table: DATABASECHANGELOG
+    database-change-log-lock-table: DATABASECHANGELOGLOCK
+
+  modulith:
+    events:
+      republish-outstanding-events-on-restart: true
+
+server:
+  port: ${SERVER_PORT}
+  servlet:
+    context-path: /retail-service
+
+jwt:
+  secret: ${JWT_SECRET}
+  accessToken:
+    expiration-minutes: 30
+  refreshToken:
+    expiration-days: 7
