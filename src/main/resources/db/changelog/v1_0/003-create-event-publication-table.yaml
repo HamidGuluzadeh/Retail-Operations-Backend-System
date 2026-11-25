@@ -1,0 +1,61 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create-event-publication-table-2026-11-24
+      author: Hamid Guluzadeh
+      changes:
+        - createTable:
+            tableName: event_publication
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: listener_id
+                  type: TEXT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: event_type
+                  type: TEXT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: serialized_event
+                  type: TEXT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: publication_date
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: completion_date
+                  type: TIMESTAMP WITH TIME ZONE
+
+              - column:
+                  name: status
+                  type: TEXT
+
+              - column:
+                  name: completion_attempts
+                  type: INT
+
+              - column:
+                  name: last_resubmission_date
+                  type: TIMESTAMP WITH TIME ZONE
+
+        - createIndex:
+            tableName: event_publication
+            indexName: event_publication_by_completion_date_idx
+            columns:
+              - column:
+                  name: completion_date
