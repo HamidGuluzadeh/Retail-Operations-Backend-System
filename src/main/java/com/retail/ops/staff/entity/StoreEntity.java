@@ -1,6 +1,7 @@
 package com.retail.ops.staff.entity;
 
 import com.retail.ops.staff.model.StoreFormat;
+import com.retail.ops.staff.model.StoreStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -34,6 +35,10 @@ public class StoreEntity {
     @Column(name = "format", length = 30, nullable = false)
     StoreFormat format;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", length = 15, nullable = false)
+    StoreStatus status;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     Instant createdAt;
@@ -49,4 +54,8 @@ public class StoreEntity {
     @LastModifiedBy
     @Column(name = "updated_by", length = 36)
     String updatedBy;
+
+    @Version
+    @Column(name = "version", nullable = false)
+    Long version;
 }

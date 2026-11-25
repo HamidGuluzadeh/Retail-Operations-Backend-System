@@ -64,4 +64,8 @@ public class EmployeeEntity {
     @LastModifiedBy
     @Column(name = "updated_by", length = 36)
     String updatedBy;
+
+    @Version
+    @Column(name = "version", nullable = false)
+    Long version;
 }
