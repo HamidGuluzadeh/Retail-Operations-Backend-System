@@ -1,5 +1,6 @@
 package com.retail.ops.staff.entity;
 
+import com.retail.ops.staff.model.EmployeeRole;
 import com.retail.ops.staff.model.EmployeeStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -40,6 +41,11 @@ public class EmployeeEntity {
     @Column(name = "email", length = 50)
     String email;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", length = 20, nullable = false)
+    EmployeeRole role;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 15, nullable = false)
     EmployeeStatus status;
 
