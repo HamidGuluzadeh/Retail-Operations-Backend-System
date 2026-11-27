@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,9 @@ public class StoreController {
     StoreService storeService;
 
     @GetMapping
-    public ResponseEntity<SuccessDto<Page<StoreResponseDto>>> getStores(StoreFormat format, StoreStatus status, Pageable pageable) {
+    public ResponseEntity<SuccessDto<Page<StoreResponseDto>>> getStores(@RequestParam(required = false) StoreFormat format,
+                                                                        @RequestParam(required = false) StoreStatus status,
+                                                                        @PageableDefault(size = 20, sort = "code") Pageable pageable) {
         Page<StoreResponseDto> response = storeService.getStores(format, status, pageable);
         SuccessDto<Page<StoreResponseDto>> successDto = new SuccessDto<>(SuccessStatus.SUCCESS, response);
         return new ResponseEntity<>(successDto, HttpStatus.OK);
