@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-create-refresh-tokens-table-2026-11-28
+      author: Hamid Guluzadeh
+      changes:
+        - createTable:
+            tableName: refresh_tokens
+            columns:
+              - column:
+                  name: id
+                  type: VARCHAR(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: token_id
+                  type: VARCHAR(36)
+                  constraints:
+                    unique: true
+                    nullable: false
+
+              - column:
+                  name: token_hash
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+
+              - column:
+                  name: user_id
+                  type: VARCHAR(36)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_refresh_tokens_user
+                    references: users(id)
+                    deleteCascade: true
+
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: expires_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: revoked_at
+                  type: TIMESTAMP
+
+        - createIndex:
+            tableName: refresh_tokens
+            indexName: idx_refresh_tokens_token_hash
+            columns:
+              - column:
+                  name: token_hash
+
+        - createIndex:
+            tableName: refresh_tokens
+            indexName: idx_refresh_tokens_user_id
+            columns:
+              - column:
+                  name: user_id
