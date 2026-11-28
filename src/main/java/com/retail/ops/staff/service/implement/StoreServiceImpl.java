@@ -66,7 +66,6 @@ public class StoreServiceImpl implements StoreService {
         storeEntity.setCode(request.code().trim().toUpperCase());
         storeEntity.setStatus(StoreStatus.ACTIVE);
         storeEntity.setCreatedAt(Instant.now());
-        storeEntity.setCreatedBy("SYSTEM");
 
         return storeMapper.mapEntityToResponse(storeEntity);
     }
@@ -83,7 +82,6 @@ public class StoreServiceImpl implements StoreService {
 
         storeMapper.updateEntityFromRequest(request, storeEntity);
         storeEntity.setUpdatedAt(Instant.now());
-        storeEntity.setUpdatedBy("SYSTEM");
 
         return storeMapper.mapEntityToResponse(storeEntity);
     }
@@ -109,7 +107,6 @@ public class StoreServiceImpl implements StoreService {
 
         storeEntity.setStatus(newStatus);
         storeEntity.setUpdatedAt(Instant.now());
-        storeEntity.setUpdatedBy("SYSTEM");
 
         return storeMapper.mapEntityToResponse(storeEntity);
     }

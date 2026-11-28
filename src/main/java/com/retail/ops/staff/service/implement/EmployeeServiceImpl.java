@@ -70,7 +70,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeEntity.setStore(storeEntity);
         employeeEntity.setStatus(EmployeeStatus.ACTIVE);
         employeeEntity.setCreatedAt(Instant.now());
-        employeeEntity.setCreatedBy("SYSTEM");
 
         return employeeMapper.mapEntityToResponse(employeeEntity);
     }
@@ -91,7 +90,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeMapper.updateEntityFromRequest(request, employeeEntity);
         employeeEntity.setUpdatedAt(Instant.now());
-        employeeEntity.setUpdatedBy("SYSTEM");
 
         return employeeMapper.mapEntityToResponse(employeeEntity);
     }
@@ -119,7 +117,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeEntity.setStore(storeEntity);
         employeeEntity.setUpdatedAt(Instant.now());
-        employeeEntity.setUpdatedBy("SYSTEM");
 
         return employeeMapper.mapEntityToResponse(employeeEntity);
     }
@@ -140,7 +137,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeEntity.setRole(newRole);
         employeeEntity.setUpdatedAt(Instant.now());
-        employeeEntity.setUpdatedBy("SYSTEM");
 
         return employeeMapper.mapEntityToResponse(employeeEntity);
     }
@@ -161,7 +157,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeEntity.setStatus(newStatus);
         employeeEntity.setUpdatedAt(Instant.now());
-        employeeEntity.setUpdatedBy("SYSTEM");
 
         if (newStatus.equals(EmployeeStatus.TERMINATED) || newStatus.equals(EmployeeStatus.SUSPENDED)) {
             eventPublisher.publishEvent(new EmployeeDeactivatedEvent(
